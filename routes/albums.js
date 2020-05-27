@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const albumsController = require('../controllers/albums_controller')
 
-/* GET / */
+// GET / 
 router.get('/', albumsController.index);
 
-/* GET /:albumId */
+// GET /:albumId 
 router.get('/:albumId', albumsController.show);
 
-/* POST /*/
+// POST /
 router.post('/', albumsController.store);
 
-/* POST /:albumId */
+// POST /:albumId 
 router.put('/:albumId', albumsController.update);
 
-/* POST /:albumId */
+// POST /:albumId 
 router.put('/:albumId', albumsController.destroy);
 
 module.exports = router;
