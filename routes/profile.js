@@ -9,6 +9,9 @@ router.get('/', profileController.getProfile);
 //  GET profile's photos
 router.get('/photos', profileController.getPhotos);
 
+//  GET profile's photos
+router.get('/albums', profileController.getAlbums);
+
 //  PUT a specific profile 
 router.put('/', profileValidationRules.updateProfileRules, profileController.updateProfile);
 

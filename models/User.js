@@ -4,14 +4,19 @@ const bcrypt = require('bcrypt');
 module.exports = (bookshelf) => {
     return bookshelf.model('User', {
         tableName: 'users',
-        // photos() {
-        //     return this.hasMany('Photos');
-		// },
-		// albums() {
-		// 	return this.hasMany('Albums')
-		// }
+        photos() {
+            return this.belongsTo('Photos');
+		},
+		albums() {
+			return this.belongsTo('Album')
+		}
     }, {
-        hashSaltRounds: 10,
+		hashSaltRounds: 10,
+
+		fetchById(id, options = {}) {
+			return new this({ id }).fetch(options);
+		},
+		
         async login(email, password) {
 			// check if user exists
 			const user = await new this({ email }).fetch({ require: false });

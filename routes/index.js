@@ -11,17 +11,16 @@ router.get('/', (req, res) => {
   res.send({ status: "success" });
 });
 
-router.use('/albums', require('./albums'));
-router.use('/photos', require('./photos'));
-
-// POST
+router.use('/albums', [auth.basic], require('./albums'));
+router.use('/photos', [auth.basic],require('./photos'));
+router.use('/users', [auth.basic],require('./users'));
 router.use('/profile', [auth.basic], require('./profile'));
 
+// POST
 router.post('/register', [userValidationRules.createRules], authController.register);
 
 router.post('/login', [auth.basic], login.getProfile);
 
-router.use('/users', require('./users'));
 
 
 module.exports = router;
