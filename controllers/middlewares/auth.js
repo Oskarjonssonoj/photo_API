@@ -1,5 +1,5 @@
 // Authentication middleware
-const { Users } = require('../../models')
+const { User } = require('../../models')
 
 const basic = async (req, res, next) => {
 	// check if Authorization header exists, otherwise bail
@@ -27,7 +27,7 @@ const basic = async (req, res, next) => {
 	// kalle:omg-food
 	const [username, password] = decodedPayload.split(':');
 
-	const user = await Users.login(username, password);
+	const user = await User.login(username, password);
 	if (!user) {
 		res.status(401).send({
 			status: 'fail',
