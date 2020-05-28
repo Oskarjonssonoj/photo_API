@@ -1,6 +1,7 @@
 /**
  * Album Controller
  */
+const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 /**
  * Get all resources
@@ -8,7 +9,7 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_albums = await models.Albums.fetchAll();
+	const all_albums = await models.Album.fetchAll();
 	res.send({
 		status: 'success',
 		data: {
@@ -22,8 +23,8 @@ const index = async (req, res) => {
  * GET /:albumId
  */
 const show = async (req, res) => {
-	const album = await new models.Albums({ id: req.params.albumId })
-		.fetch();
+	const album = await new models.Album({ id: req.params.albumId })
+		.fetch({ withRelated: ['photos']});
 	res.send({
 		status: 'success',
 		data: {
@@ -36,11 +37,38 @@ const show = async (req, res) => {
  *
  * POST /
  */
-const store = (req, res) => {
-	res.status(405).send({
-		status: 'fail',
-		message: 'Method Not Allowed.',
-	});
+const store = async (req, res) => {
+	// Finds the validation errors in this request and wraps them in an object with handy functions
+	console.log("Request data", req.body);
+	const errors = validationResult(req);
+	console.log('error', errors)
+	if (!errors.isEmpty()) {
+		console.log("Create photo request failed validation:", errors.array());
+		res.status(422).send({
+			status: 'fail',
+			data: errors.array(),
+		});
+		return;
+	}
+	const validData = matchedData(req);
+	console.log('validData', validData);
+	
+	try {
+		const album = await new models.Album(validData).save();
+		console.log("Created new photo successfully:", album);
+		res.send({
+			status: 'success',
+			data: {
+				album,
+			},
+		});
+	} catch (error) {
+		res.status(500).send({
+			status: 'error',
+			message: 'Exception thrown in database when creating a new album.',
+		});
+		throw error;
+	}
 }
 /**
  * Update a specific resource

@@ -41,6 +41,7 @@ const show = async (req, res) => {
 const store = async (req, res) => {
 	// Finds the validation errors in this request and wraps them in an object with handy functions
 	const errors = validationResult(req);
+	console.log('hejsan', errors)
 	if (!errors.isEmpty()) {
 		console.log("Create user request failed validation:", errors.array());
 		res.status(422).send({
@@ -50,6 +51,8 @@ const store = async (req, res) => {
 		return;
 	}
 	const validData = matchedData(req);
+	console.log('hej', validData);
+
 	// generate a hash of `validData.password`
 	try {
 		validData.password = await bcrypt.hash(validData.password, models.User.hashSaltRounds); // hash.salt is returned from bcrypt.hash()

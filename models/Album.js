@@ -1,11 +1,11 @@
 // Author module
 
 module.exports = (bookshelf) => {
-    return bookshelf.model('Albums', {
+    return bookshelf.model('Album', {
         tableName: 'albums',
-        // photos() {
-        //     return this.hasMany('Photos');
-        // },
+        photos() {
+            return this.hasMany('Photos');
+        },
         // users() {
         //     return this.belongsTo('Users');
         // },

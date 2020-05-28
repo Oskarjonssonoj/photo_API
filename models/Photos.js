@@ -1,4 +1,4 @@
-// Author model
+// Photo model
 
 module.exports = (bookshelf) => {
     return bookshelf.model('Photos', {
