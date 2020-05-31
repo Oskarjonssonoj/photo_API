@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/users_controller');
-const userValidationRules = require('../validation_rules/users')
+const userValidationRules = require('../validation_rules/users');
 
 // GET /
 router.get('/', usersController.index);
@@ -13,7 +13,7 @@ router.get('/:userId', usersController.show);
 router.post('/', userValidationRules.createRules, usersController.store);
 
 // PUT /:userId
-router.put('/:userId', userValidationRules.updateRules, usersController.update);
+router.put('/:userId', usersController.update);
 
 // POST /:userId
 router.delete('/:userId', usersController.destroy);

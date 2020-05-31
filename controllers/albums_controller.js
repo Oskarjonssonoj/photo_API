@@ -9,13 +9,26 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_albums = await models.Album.fetchAll({ withRelated: ['users']});
-	res.send({
-		status: 'success',
-		data: {
-			albums: all_albums
+	console.log(req.body)
+		// query db for user and eager load the books relation
+		let user = null;
+		try {
+			user = await models.User.fetchById(req.user.data.id, { withRelated: ['albums'] });
+		} catch (error) {
+			console.error(error);
+			res.sendStatus(404);
+			return;
 		}
-	});
+	
+		// get this user's book
+		const albums = user.related('albums');
+	
+		res.send({
+			status: 'success',
+			data: {
+				albums,
+			},
+		});
 }
 /**
  * Get a specific resource
@@ -23,15 +36,22 @@ const index = async (req, res) => {
  * GET /:albumId
  */
 const show = async (req, res) => {
-	console.log(req.params)
 	const album = await new models.Album({ id: req.params.albumId })
-		.fetch({ withRelated: ['photos']}); 
-	res.send({
-		status: 'success',
-		data: {
-			album,
+		.fetch({ withRelated: ['photos'] });
+		//check if user own the album
+		if(req.user.id === album.attributes.user_id){
+			res.send({
+				status: 'success',
+				data: {
+					album,
+				}
+			});
+		} else {
+			res.send({
+				status:'fail',
+				data: "sorry, you don't own that album"
+			})
 		}
-	});
 }
 /**
  * Store a new resource
@@ -55,7 +75,7 @@ const store = async (req, res) => {
 	console.log('validData', validData);
 	
 	try {
-		const album = await new models.Album(validData).save();
+		const album = await new models.Album(validData).save({user_id: req.user.attributes.id});
 		console.log("Created new photo successfully:", album);
 		res.send({
 			status: 'success',

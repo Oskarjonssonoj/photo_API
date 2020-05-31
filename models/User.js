@@ -5,10 +5,10 @@ module.exports = (bookshelf) => {
     return bookshelf.model('User', {
         tableName: 'users',
         photos() {
-            return this.belongsTo('Photos');
+            return this.hasMany('Photos');
 		},
 		albums() {
-			return this.belongsTo('Album')
+			return this.hasMany('Album')
 		}
     }, {
 		hashSaltRounds: 10,

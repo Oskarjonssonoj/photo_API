@@ -9,13 +9,26 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_photos = await models.Photos.fetchAll();
-	res.send({
-		status: 'success',
-		data: {
-			photos: all_photos
+	console.log(req.user)
+		// query db for user and eager load the books relation
+		let user = null;
+		try {
+			user = await models.User.fetchById(req.user.data.id, { withRelated: ['photos'] });
+		} catch (error) {
+			console.error(error);
+			res.sendStatus(404);
+			return;
 		}
-	});
+	
+		// get this user's book
+		const photos = user.related('photos');
+	
+		res.send({
+			status: 'success',
+			data: {
+				photos,
+			},
+		});
 }
 /**
  * Get a specific resource
@@ -25,12 +38,21 @@ const index = async (req, res) => {
 const show = async (req, res) => {
 	const photo = await new models.Photos({ id: req.params.photoId })
 		.fetch();
-	res.send({
-		status: 'success',
-		data: {
-			photo,
-		}
-	});
+
+	//check if user own the album
+	if(req.user.id === photo.attributes.user_id){
+		res.send({
+			status: 'success',
+			data: {
+				photo,
+			}
+		});
+	} else {
+		res.send({
+			status:'fail',
+			data: "sorry, you don't own that photo"
+		})
+	}
 }
 /**
  * Store a new resource
@@ -40,7 +62,6 @@ const show = async (req, res) => {
 const store = async (req, res) => {
 	// Finds the validation errors in this request and wraps them in an object with handy functions
 	const errors = validationResult(req);
-	console.log('error', errors)
 	if (!errors.isEmpty()) {
 		console.log("Create photo request failed validation:", errors.array());
 		res.status(422).send({
@@ -49,11 +70,9 @@ const store = async (req, res) => {
 		});
 		return;
 	}
-	const validData = matchedData(req);
-	console.log('hej', validData);
-	
+	const validData = matchedData(req)
 	try {
-		const photo = await new models.Photos(validData).save();
+		const photo = await new models.Photos(validData).save({user_id: req.user.attributes.id});
 		console.log("Created new photo successfully:", photo);
 		res.send({
 			status: 'success',
@@ -64,7 +83,7 @@ const store = async (req, res) => {
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when creating a new photo.',
+			message: 'Exception thrown in database when creating a new user.',
 		});
 		throw error;
 	}
