@@ -3,7 +3,7 @@ const router = express.Router();
 const photosController = require('../controllers/photos_controller');
 const photoValidationRules = require('../validation_rules/photos')
 
-// GET
+// GET /
 router.get('/', photosController.index);
 
 // GET /:photoId 

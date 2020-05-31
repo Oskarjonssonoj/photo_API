@@ -19,7 +19,12 @@ const index = async (req, res) => {
 	res.send({
 		status: 'success',
 		data: {
-			user: req.user,
+			user: {
+				id: req.user.attributes.id,
+				email: req.user.attributes.email,
+				first_name: req.user.attributes.first_name,
+				last_name: req.user.attributes.last_name,
+			},
 		}
 	});
 }
