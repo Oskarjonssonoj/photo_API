@@ -13,8 +13,8 @@ module.exports = (bookshelf) => {
     }, {
 		hashSaltRounds: 10,
 
-		fetchById(id, options = {}) {
-			return new this({ id }).fetch(options);
+		fetchById(id, fetchOptions = {}) {
+			return new this({ id }).fetch(fetchOptions);
 		},
 		
         async login(email, password) {

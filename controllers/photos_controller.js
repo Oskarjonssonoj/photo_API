@@ -1,16 +1,15 @@
 /**
- * Photo Controller
+ * Photos Controller
  */
 const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
+
 /**
  * Get all resources
  *
  * GET /
  */
 const index = async (req, res) => {
-	console.log(req.user)
-		// query db for user and eager load the books relation
 		let user = null;
 		try {
 			user = await models.User.fetchById(req.user.data.id, { withRelated: ['photos'] });
@@ -20,7 +19,7 @@ const index = async (req, res) => {
 			return;
 		}
 	
-		// get this user's book
+		// get this user's photo
 		const photos = user.related('photos');
 	
 		res.send({
@@ -30,6 +29,7 @@ const index = async (req, res) => {
 			},
 		});
 }
+
 /**
  * Get a specific resource
  *
@@ -54,6 +54,7 @@ const show = async (req, res) => {
 		})
 	}
 }
+
 /**
  * Store a new resource
  *
@@ -70,7 +71,7 @@ const store = async (req, res) => {
 		});
 		return;
 	}
-	const validData = matchedData(req)
+	const validData = matchedData(req);
 	try {
 		const photo = await new models.Photos(validData).save({user_id: req.user.attributes.id});
 		console.log("Created new photo successfully:", photo);
@@ -88,6 +89,7 @@ const store = async (req, res) => {
 		throw error;
 	}
 }
+
 /**
  * Update a specific resource
  *
@@ -99,6 +101,7 @@ const update = (req, res) => {
 		message: 'Method Not Allowed.',
 	});
 }
+
 /**
  * Destroy a specific resource
  *
@@ -110,6 +113,7 @@ const destroy = (req, res) => {
 		message: 'Method Not Allowed.',
 	});
 }
+
 module.exports = {
 	index,
 	show,

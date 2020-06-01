@@ -1,16 +1,15 @@
 /**
- * Album Controller
+ * Albums Controller
  */
 const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
+
 /**
  * Get all resources
  *
  * GET /
  */
 const index = async (req, res) => {
-	console.log(req.body)
-		// query db for user and eager load the books relation
 		let user = null;
 		try {
 			user = await models.User.fetchById(req.user.data.id, { withRelated: ['albums'] });
@@ -20,7 +19,7 @@ const index = async (req, res) => {
 			return;
 		}
 	
-		// get this user's book
+		// get this user's albums
 		const albums = user.related('albums');
 	
 		res.send({
@@ -30,6 +29,7 @@ const index = async (req, res) => {
 			},
 		});
 }
+
 /**
  * Get a specific resource
  *
@@ -38,7 +38,7 @@ const index = async (req, res) => {
 const show = async (req, res) => {
 	const album = await new models.Album({ id: req.params.albumId })
 		.fetch({ withRelated: ['photos'] });
-		//check if user own the album
+		//check if user owns the album
 		if(req.user.id === album.attributes.user_id){
 			res.send({
 				status: 'success',
@@ -53,6 +53,7 @@ const show = async (req, res) => {
 			})
 		}
 }
+
 /**
  * Store a new resource
  *
@@ -60,9 +61,7 @@ const show = async (req, res) => {
  */
 const store = async (req, res) => {
 	// Finds the validation errors in this request and wraps them in an object with handy functions
-	console.log("Request data", req.body);
 	const errors = validationResult(req);
-	console.log('error', errors)
 	if (!errors.isEmpty()) {
 		console.log("Create photo request failed validation:", errors.array());
 		res.status(422).send({
@@ -91,6 +90,36 @@ const store = async (req, res) => {
 		throw error;
 	}
 }
+
+/**
+ * Add photo to album
+ *
+ * POST /:albumId/photos
+ */
+const addPhotoToAlbum = async (req, res) => {
+	// Finds the validation errors in this request and wraps them in an object with handy functions
+    const error = validationResult(req);
+    if(!error.isEmpty()){
+        res.status(422).send({
+            status: 'fail',
+            data: error.array()
+        });
+        return;
+    }
+    try {
+        const photo = await models.Photos.fetchById(req.body.photo_id);
+        const album = await models.Album.fetchById(req.params.albumId);
+        const result = await album.photos().attach([photo]);
+        res.status(201).send({
+            status: 'success',
+            data: result,
+        })
+    } catch (error) {
+        res.sendStatus(404);
+        throw error;
+    }
+}
+
 /**
  * Update a specific resource
  *
@@ -102,6 +131,7 @@ const update = (req, res) => {
 		message: 'Method Not Allowed.',
 	});
 }
+
 /**
  * Destroy a specific resource
  *
@@ -113,10 +143,12 @@ const destroy = (req, res) => {
 		message: 'Method Not Allowed.',
 	});
 }
+
 module.exports = {
 	index,
 	show,
 	store,
+	addPhotoToAlbum,
 	update,
 	destroy,
 }

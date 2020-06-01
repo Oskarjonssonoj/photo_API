@@ -3,18 +3,20 @@ const bcrypt = require('bcrypt');
 const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
-// Register account
-// POST /register
-
+/**
+ * Register a new account
+ *
+ * POST /
+ */
 const register = async (req, res) => {
     // Finds the validation errors in this request and wraps them in an object with handy functions
-const errors = validationResult(req);
-if (!errors.isEmpty()) {
-    console.log("Create user request failed validation:", errors.array());
-    res.status(422).send({
-        status: 'fail',
-        data: errors.array(),
-    });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log("Create user request failed validation:", errors.array());
+        res.status(422).send({
+            status: 'fail',
+            data: errors.array(),
+        });
     return;
 }
 

@@ -1,12 +1,10 @@
-// Photo model
-
-        // albums() {
-        //     return this.belongsToMany('Albums');
-        // },
-
-        module.exports = (bookshelf) => {
-            return bookshelf.model('Photos', {
-                tableName: 'photos',
+// Photos model
+module.exports = (bookshelf) => {
+    return bookshelf.model('Photos', {
+        tableName: 'photos',
+                albums() {
+                    return this.belongsToMany('Albums');
+                },
                 users(){
                     return this.belongsTo('User')
                 }

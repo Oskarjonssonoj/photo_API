@@ -12,7 +12,6 @@ const createRules = [
     }),
     body('url').isLength({ min: 3 }),
     body('comment').optional().isLength({ min: 2 }),
-    body('album_id').optional().isLength({ min: 1}),
 ];
 
 module.exports = {

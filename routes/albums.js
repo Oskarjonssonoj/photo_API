@@ -12,6 +12,9 @@ router.get('/:albumId', albumsController.show);
 // POST /
 router.post('/', albumValidationRules.createRules, albumsController.store);
 
+// POST /:albumId/photos
+router.post('/:albumId/photos', albumValidationRules.addPhotoToAlbumRules, albumsController.addPhotoToAlbum);
+
 // POST /:albumId 
 router.put('/:albumId', albumsController.update);
 

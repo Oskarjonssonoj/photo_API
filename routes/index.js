@@ -9,7 +9,6 @@ const userValidationRules = require('../validation_rules/users');
 router.get('/', (req, res) => {
   res.send({ status: "success" });
 });
-
 router.use('/albums', [auth.basic], require('./albums'));
 router.use('/photos', [auth.basic],require('./photos'));
 router.use('/users', [auth.basic],require('./users'));

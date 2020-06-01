@@ -1,8 +1,10 @@
 // Authentication middleware
 const { User } = require('../../models')
 
+/**
+ * Basic Authentication function
+ */
 const basic = async (req, res, next) => {
-	
 	if (!req.headers.authorization) {
 		res.status(401).send({
 			status: 'fail',
@@ -36,7 +38,6 @@ const basic = async (req, res, next) => {
 
 	next();
 };
-
 
 module.exports = {
     basic,
