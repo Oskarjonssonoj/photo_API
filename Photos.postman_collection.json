@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "3956ee86-74be-47c1-a69f-ee0fa5fe9e30",
+		"name": "Photos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "POST /register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n\t\"email\": \"oskar@gmail.com\",\n    \"password\": \"hej\",\n    \"first_name\": \"Oskar\",\n    \"last_name\": \"Jönsson\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/register",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ola",
+			"item": [
+				{
+					"name": "GET /users (Ola)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /albums (Ola)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /albums/:albumId (Ola)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/9",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /albums (Ola)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /photos (Ola)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /photos (Ola)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"California - Santa Barbara\",\n\t\"url\": \"http://reseMapp_Oskar.dsd\",\n\t\"comment\": \"Strandhäng\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /albums/:albumId/photos (Ola)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "jonsson@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"photo_id\": 51\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/14/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								"14",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Oskar",
+			"item": [
+				{
+					"name": "GET /users (Oskar)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Resebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /albums (Oskar)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Resebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /albums/:albumId (Oskar)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Familjebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/12",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /albums (Oskar)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Padelbilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /photos (Oskar)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Resebilder\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /photos (Oskar)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"California - Santa Barbara\",\n\t\"url\": \"http://reseMapp_Oskar.dsd\",\n\t\"comment\": \"Strandhäng\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /albums/:albumId/photos (Oskar)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "oskar@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hej",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"photo_id\": 38\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://oskarjonssonoj-photoapi.herokuapp.com/albums/13/photos",
+							"protocol": "https",
+							"host": [
+								"oskarjonssonoj-photoapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"albums",
+								"13",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
