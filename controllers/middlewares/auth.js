@@ -1,5 +1,5 @@
 // Authentication middleware
-const { User } = require('../../models')
+const models = require('../../models')
 
 /**
  * Basic Authentication function
@@ -24,7 +24,7 @@ const basic = async (req, res, next) => {
 
 	const [username, password] = decodedPayload.split(':');
 
-	const user = await User.login(username, password);
+	const user = await models.User.login(username, password);
 	if (!user) {
 		res.status(401).send({
 			status: 'fail',
