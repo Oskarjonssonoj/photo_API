@@ -48,9 +48,9 @@ const show = async (req, res) => {
 			}
 		});
 	} else {
-		res.send({
-			status:'fail',
-			data: "sorry, you don't own that photo"
+		res.status(401).send({
+			status: "fail",
+			data: "Sorry, you don't own that photo"
 		})
 	}
 }

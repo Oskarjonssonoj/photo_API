@@ -47,9 +47,9 @@ const show = async (req, res) => {
 				}
 			});
 		} else {
-			res.send({
-				status:'fail',
-				data: "sorry, you don't own that album"
+			res.status(401).send({
+				status: "fail",
+				data: "Sorry, you don't own that album"
 			})
 		}
 }
@@ -109,11 +109,20 @@ const addPhotoToAlbum = async (req, res) => {
     try {
         const photo = await models.Photos.fetchById(req.body.photo_id);
         const album = await models.Album.fetchById(req.params.albumId);
-        const result = await album.photos().attach([photo]);
-        res.status(201).send({
-            status: 'success',
-            data: result,
-        })
+		
+		if(photo.attributes.user_id === album.attributes.user_id){
+			const result = await album.photos().attach([photo]);
+		
+			res.status(201).send({
+				status: 'success',
+				data: result,
+			})
+		} else {
+			res.status(401).send({
+				status: "fail",
+				data: "Sorry, you don't own that album"
+			})
+		}
     } catch (error) {
         res.sendStatus(404);
         throw error;
